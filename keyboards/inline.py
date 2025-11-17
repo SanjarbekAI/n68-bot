@@ -1,0 +1,10 @@
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
+languages = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="UZ 🇺🇿", callback_data="uz"),
+            InlineKeyboardButton(text="EN 🇺🇸", callback_data="en")
+        ]
+    ]
+)
