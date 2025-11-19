@@ -6,6 +6,7 @@ from aiogram.types import Message, CallbackQuery, ReplyKeyboardRemove
 from keyboards.default import phone_number
 from keyboards.inline import languages
 from states.register import RegisterState
+from utils.db_commands.user import add_user
 
 router = Router()
 
@@ -69,13 +70,20 @@ async def phone_number_handler(message: Message, state: FSMContext):
 
 @router.message(RegisterState.age)
 async def age_handler(message: Message, state: FSMContext):
-    await state.update_data(age=message.text)
+    await state.update_data(age=message.text, chat_id=message.chat.id, created_at=message.date)
     data = await state.get_data()
-    print(data)
     lang = data.get('language')
-    if lang == "en":
-        text = "Successfully registered ✅"
+
+    new_user = await add_user(data=data)
+    if new_user:
+        if lang == "en":
+            text = "Successfully registered ✅"
+        else:
+            text = "Muvaffaqqiyatli ro'yxatdan o'tdingiz ✅"
     else:
-        text = "Muvaffaqqiyatli ro'yxatdan o'tdingiz ✅"
+        if lang == "en":
+            text = "Not registered"
+        else:
+            text = "Botda muommo mavjud biz bilan bog'laning"
     await message.answer(text=text)
     await state.clear()
