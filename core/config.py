@@ -14,7 +14,7 @@ DB_PASS = os.getenv("DB_PASS")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 
-DEVELOPER = 1358470521
+DEVELOPER = os.getenv("DEVELOPER")
 
 DB_CONFIG = {
     "database": DB_NAME,

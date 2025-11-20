@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher
 
 from core.config import BOT_TOKEN, DEVELOPER
 from core.database_settings import database
-from handlers import register
+from handlers import register, settings
 from utils.set_default_commands import set_default_commands
 
 
@@ -25,6 +25,7 @@ async def main():
     dp = Dispatcher()
 
     dp.include_router(router=register.router)
+    dp.include_router(router=settings.router)
 
     dp.startup.register(startup)
     dp.shutdown.register(shutdown)

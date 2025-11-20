@@ -8,3 +8,11 @@ languages = InlineKeyboardMarkup(
         ]
     ]
 )
+
+inline_keyboard_test = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text="Test", callback_data="inline_keyboard")
+        ]
+    ]
+)
